@@ -2,14 +2,22 @@ import { useRef } from "react";
 import { useState } from "react";
 import Input from "./Input";
 
-export default function NewProject(){
+export default function NewProject({onAdd}){
     const title = useRef();
     const description = useRef();
     const dueDate = useRef();
 
 
-    function handleInput(e){
-        console.log(e.currentTarget)
+    function handleSave(){    
+        const enteredDescription = description.current.value;
+        const enteredDueDate= dueDate.current.value;
+        const enteredTitle = title.current.value;
+        
+        onAdd({
+            title: enteredTitle,
+            description: enteredDescription,
+            dueDate: enteredDueDate,
+        })
     }
 
     return (
@@ -19,13 +27,13 @@ export default function NewProject(){
                     <button className="text-stone-700 hover:text-stone-950">Cancel</button>
                 </li>
                 <li>
-                    <button className="bg-blue-500 py-2 px-6 rounded-md hover:text-stone-700">Save</button>
+                    <button onClick={handleSave} className="bg-blue-500 py-2 px-6 rounded-md hover:text-stone-700">Save</button>
                 </li>
             </menu>   
             <div>
-                <Input onChange={handleInput} label="Title" />
-                <Input onChange={handleInput} label="Description" textarea/>
-                <Input onChange={handleInput} label="Due Date" />
+                <Input type="text" ref={title} label="Title" />
+                <Input ref={description} label="Description" textarea/>
+                <Input type="date" ref={dueDate} label="Due Date" />
                 
             </div>             
         </div>

@@ -1,6 +1,17 @@
+import { useRef } from "react";
+import { useState } from "react";
 import Input from "./Input";
 
 export default function NewProject(){
+    const title = useRef();
+    const description = useRef();
+    const dueDate = useRef();
+
+
+    function handleInput(e){
+        console.log(e.currentTarget)
+    }
+
     return (
         <div className="w-[35rem] mt-16 " >
             <menu className="flex items-center justify-end gap-4 my-4 ">
@@ -12,9 +23,9 @@ export default function NewProject(){
                 </li>
             </menu>   
             <div>
-                <Input label="Title" />
-                <Input label="Description" textarea/>
-                <Input label="Due Date" />
+                <Input onChange={handleInput} label="Title" />
+                <Input onChange={handleInput} label="Description" textarea/>
+                <Input onChange={handleInput} label="Due Date" />
                 
             </div>             
         </div>
